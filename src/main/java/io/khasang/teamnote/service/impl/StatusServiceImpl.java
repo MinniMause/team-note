@@ -6,6 +6,8 @@ import io.khasang.teamnote.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author gothmog on 06.08.2017.
  */
@@ -17,5 +19,26 @@ public class StatusServiceImpl implements StatusService{
     @Override
     public Status addStatus(Status status) {
         return statusDao.create(status);
+    }
+
+    @Override
+    public Status getById(long id) {
+        return statusDao.getById(id);
+    }
+
+    @Override
+    public Status update(Status status) {
+        return statusDao.update(status);
+    }
+
+    @Override
+    public Status delete(long id) {
+        Status statusForDelete = statusDao.getById(id);
+        return statusDao.delete(statusForDelete);
+    }
+
+    @Override
+    public List<Status> getList() {
+        return statusDao.getList();
     }
 }
