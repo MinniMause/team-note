@@ -6,7 +6,7 @@ import javax.persistence.*;
  * @author gothmog on 06.08.2017.
  */
 @Entity
-@Table(name = "task_statuses")
+@Table(name = "status")
 public class Status {
 
     @Id
