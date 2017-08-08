@@ -19,6 +19,10 @@ public class Status {
 
     private String description;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id")
+    private Task taskStatus;
+
     public Status() {
     }
 
@@ -29,6 +33,12 @@ public class Status {
     public Status(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Status(String name, String description, Task taskStatus) {
+        this.name = name;
+        this.description = description;
+        this.taskStatus = taskStatus;
     }
 
     public long getId() {
@@ -53,5 +63,13 @@ public class Status {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Task getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Task taskStatus) {
+        this.taskStatus = taskStatus;
     }
 }
