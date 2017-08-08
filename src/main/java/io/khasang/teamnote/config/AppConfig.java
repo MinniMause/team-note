@@ -1,8 +1,11 @@
 package io.khasang.teamnote.config;
 
+import io.khasang.teamnote.dao.DocumentDao;
 import io.khasang.teamnote.dao.StatusDao;
+import io.khasang.teamnote.dao.impl.DocumentDaoImpl;
 import io.khasang.teamnote.dao.impl.StatusDaoImpl;
 import io.khasang.teamnote.db.dao.impl.ImplCatDao;
+import io.khasang.teamnote.entity.Document;
 import io.khasang.teamnote.entity.Status;
 import io.khasang.teamnote.model.BackupTable;
 import io.khasang.teamnote.service.CatService;
@@ -22,12 +25,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @PropertySource(value = {"classpath:backup.properties"})
 public class AppConfig {
 
-    private final Environment environment;
-
     @Autowired
-    public AppConfig(Environment environment) {
-        this.environment = environment;
-    }
+    private  Environment environment;
 
     @Bean
     public DriverManagerDataSource dataSource() {
@@ -44,6 +43,11 @@ public class AppConfig {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
+    }
+
+    @Bean
+    public DocumentDao documentDao(){
+        return new DocumentDaoImpl(Document.class);
     }
 
     @Bean
